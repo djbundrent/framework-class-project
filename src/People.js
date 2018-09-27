@@ -7,16 +7,27 @@ class People extends Component {
 
         this.state = {
             people: [
-                { name: "Sally W.", age: 23 },
-                { name: "Rick S.", age: 30 },
-                { name: "Samantha T.", age: 52 }
-          ]
+                { id: 1, name: "Sally W.", age: 23 },
+                { id: 2, name: "Rick S.", age: 30 },
+                { id: 3, name: "Samantha T.", age: 52 }
+            ]
         }
     };
 
     onPeopleChange = (id, value) => {
-        console.log(id, value);
+        this.setState( state => {
+            const newPeople = state.people.map(person => {
+                if (person.id === id){
+                    return { ...person, name: value };
+                } else {
+                    return person;
+                }
+            });
 
+            return { 
+                people: newPeople
+            };
+        });
     };
 
     render() {
@@ -31,4 +42,5 @@ class People extends Component {
         );
     };
 }
+
 export default People;  
